@@ -1,6 +1,6 @@
 # 🚀 Estudos de Testes de Desempenho com k6
 
-Este repositório contém exemplos práticos e estudos sobre testes de desempenho utilizando o **k6**, uma ferramenta moderna de teste de carga desenvolvida pela Grafana.
+Este repositório contém exemplos práticos e estudos sobre testes de desempenho utilizando o **k6**, uma ferramenta moderna de teste de carga desenvolvida pela Grafana
 
 ## 📋 Sobre o k6
 
