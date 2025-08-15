@@ -1,5 +1,6 @@
 //Inicialização
-import sleep from 'k6'
+import { sleep } from 'k6';
+
 
 //Configuração
 export const options = {
