@@ -14,15 +14,32 @@ O k6 é uma ferramenta de teste de carga de código aberto que permite:
 
 ```
 testes-desempenho/
-├── aula1.js          # Introdução básica ao k6
-├── aula2.js          # Métricas e verificações HTTP
-├── smoke_teste.js    # Configurações de carga variável
-└── README.md         # Este arquivo
+├── modulo1/
+│   ├── aula1.js          # Introdução básica ao k6
+│   └── aula2.js          # Métricas e verificações HTTP
+├── modulo2/
+│   ├── breakpointtest.js # Teste de breakpoint
+│   ├── smoke_teste.js    # Teste de smoke
+│   ├── soaktest.js       # Teste de soak (longa duração)
+│   └── spiketest.js      # Teste de spike (picos de carga)
+├── modulo3/
+│   ├── aula10.js         # Exemplos avançados
+│   ├── aula11.js         # Configurações específicas
+│   ├── aula12.js         # Testes de performance
+│   ├── aula14.js         # Métricas customizadas
+│   ├── aula15.js         # Thresholds e validações
+│   ├── aula16.js         # Configurações de ambiente
+│   ├── aula17.js         # Testes de stress
+│   ├── aula18.js         # Análise de resultados
+│   └── aula19.js         # Testes com variáveis de ambiente
+└── README.md             # Este arquivo
 ```
 
 ## 🎯 Exemplos Incluídos
 
-### 1. **aula1.js** - Introdução Básica
+### 📚 Módulo 1 - Fundamentos
+
+#### **aula1.js** - Introdução Básica
 - Configuração básica do k6
 - Estrutura de um teste simples
 - Funções de setup e teardown
@@ -35,7 +52,7 @@ export const options = {
 }
 ```
 
-### 2. **aula2.js** - Métricas e Verificações HTTP
+#### **aula2.js** - Métricas e Verificações HTTP
 - Requisições HTTP
 - Diferentes tipos de métricas:
   - **Counter**: Conta eventos
@@ -44,10 +61,70 @@ export const options = {
   - **Trend**: Analisa tendências de tempo
 - Verificações de resposta
 
-### 3. **smoke_teste.js** - Configurações Avançadas
-- Teste de carga com 100 usuários virtuais
-- Configuração de estágios (ramp-up, steady-state, ramp-down)
-- Exemplo de teste de stress
+### 📚 Módulo 2 - Tipos de Teste
+
+#### **smoke_teste.js** - Teste de Smoke
+- Verificação básica de funcionalidade
+- Configuração de carga leve
+- Validação de resposta rápida
+
+#### **breakpointtest.js** - Teste de Breakpoint
+- Identificação do ponto de quebra do sistema
+- Teste incremental de carga
+- Análise de degradação de performance
+
+#### **spiketest.js** - Teste de Spike
+- Simulação de picos súbitos de carga
+- Análise de comportamento sob stress
+- Recuperação do sistema
+
+#### **soaktest.js** - Teste de Soak
+- Teste de longa duração
+- Detecção de memory leaks
+- Estabilidade do sistema
+
+### 📚 Módulo 3 - Técnicas Avançadas
+
+#### **aula10.js** - Configurações Avançadas
+- Configurações complexas de carga
+- Múltiplos cenários de teste
+
+#### **aula11.js** - Configurações Específicas
+- Otimizações de performance
+- Configurações customizadas
+
+#### **aula12.js** - Testes de Performance
+- Foco em métricas específicas
+- Análise detalhada de performance
+
+#### **aula14.js** - Métricas Customizadas
+- Criação de métricas personalizadas
+- Análise de dados específicos
+
+#### **aula15.js** - Thresholds e Validações
+- Definição de limites de aceitação
+- Validações automáticas
+
+#### **aula16.js** - Configurações de Ambiente
+- Variáveis de ambiente
+- Configurações dinâmicas
+
+#### **aula17.js** - Testes de Stress
+- Testes de carga máxima
+- Análise de limites do sistema
+
+#### **aula18.js** - Análise de Resultados
+- Interpretação de métricas
+- Relatórios detalhados
+
+#### **aula19.js** - Testes com Variáveis de Ambiente
+- Uso de variáveis de ambiente
+- Configuração flexível de URLs
+
+```javascript
+// Exemplo de uso de variáveis de ambiente
+const res = http.get(__ENV.URL);
+```
 
 ## 🛠️ Como Executar
 
@@ -57,14 +134,29 @@ export const options = {
 ### Comandos de Execução
 
 ```bash
-# Executar teste básico
-k6 run aula1.js
+# Módulo 1 - Fundamentos
+k6 run modulo1/aula1.js
+k6 run modulo1/aula2.js
 
-# Executar teste com métricas HTTP
-k6 run aula2.js
+# Módulo 2 - Tipos de Teste
+k6 run modulo2/smoke_teste.js
+k6 run modulo2/breakpointtest.js
+k6 run modulo2/spiketest.js
+k6 run modulo2/soaktest.js
 
-# Executar teste de carga
-k6 run smoke_teste.js
+# Módulo 3 - Técnicas Avançadas
+k6 run modulo3/aula10.js
+k6 run modulo3/aula11.js
+k6 run modulo3/aula12.js
+k6 run modulo3/aula14.js
+k6 run modulo3/aula15.js
+k6 run modulo3/aula16.js
+k6 run modulo3/aula17.js
+k6 run modulo3/aula18.js
+k6 run modulo3/aula19.js
+
+# Exemplo com variáveis de ambiente
+k6 run -e URL=https://test.k6.io modulo3/aula19.js
 ```
 
 ## 📊 Tipos de Métricas no k6
@@ -117,12 +209,27 @@ export const options = {
 - **Error Rate**: Taxa de erros
 - **Resource Utilization**: Utilização de recursos
 
+## 🎓 Progressão de Aprendizado
+
+### Para Iniciantes
+1. **Módulo 1**: Comece com `aula1.js` e `aula2.js` para entender os fundamentos
+2. **Módulo 2**: Explore os diferentes tipos de teste com `smoke_teste.js`
+
+### Para Intermediários
+1. **Módulo 2**: Aprofunde-se nos testes de `breakpointtest.js`, `spiketest.js` e `soaktest.js`
+2. **Módulo 3**: Explore técnicas avançadas começando com `aula10.js` e `aula11.js`
+
+### Para Avançados
+1. **Módulo 3**: Foque em `aula14.js` (métricas customizadas) e `aula15.js` (thresholds)
+2. **Módulo 3**: Aplique técnicas de análise com `aula17.js` e `aula18.js`
+
 ## 🔧 Dicas de Uso
 
 1. **Comece com poucos VUs**: Sempre teste com 1-2 usuários primeiro
 2. **Monitore recursos**: Observe CPU, memória e rede durante os testes
 3. **Analise métricas**: Foque em percentis (p95, p99) além da média
 4. **Teste em ambiente similar**: Use dados e configurações próximas ao produção
+5. **Use variáveis de ambiente**: Para flexibilidade entre ambientes (ex: `aula19.js`)
 
 ## 📚 Recursos Adicionais
 
