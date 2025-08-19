@@ -1,6 +1,6 @@
 # 🚀 Estudos de Testes de Desempenho com k6
 
-Este repositório contém exemplos práticos e estudos sobre testes de desempenho utilizando o **k6**, uma ferramenta moderna de teste de carga desenvolvida pela Grafana
+Este repositório contém exemplos práticos e estudos sobre testes de desempenho utilizando o **k6**, uma ferramenta moderna de teste de carga desenvolvida pela Grafana. **✅ CURSO FINALIZADO**
 
 ## 📋 Sobre o k6
 
@@ -9,6 +9,8 @@ O k6 é uma ferramenta de teste de carga de código aberto que permite:
 - Executar testes de carga, stress e spike
 - Gerar relatórios detalhados de performance
 - Integração com ferramentas de monitoramento
+- Testes de browser com Chromium
+- Integração com plataformas de teste em nuvem
 
 ## 📁 Estrutura do Projeto
 
@@ -23,7 +25,7 @@ testes-desempenho/
 │   ├── soaktest.js       # Teste de soak (longa duração)
 │   └── spiketest.js      # Teste de spike (picos de carga)
 ├── modulo3/
-│   ├── aula10.js         # Exemplos avançados
+│   ├── aula10.js         # Ciclo de vida de testes
 │   ├── aula11.js         # Configurações específicas
 │   ├── aula12.js         # Testes de performance
 │   ├── aula14.js         # Métricas customizadas
@@ -32,6 +34,20 @@ testes-desempenho/
 │   ├── aula17.js         # Testes de stress
 │   ├── aula18.js         # Análise de resultados
 │   └── aula19.js         # Testes com variáveis de ambiente
+├── modulo4/
+│   ├── aula23.js         # Testes com thresholds
+│   ├── aula24.js         # Validações avançadas
+│   ├── aula25.js         # Registro de usuários
+│   ├── aula26.js         # Testes com dados externos
+│   ├── aula27.js         # Manipulação de JSON
+│   ├── aula28.js         # Testes com CSV
+│   ├── dados.json        # Dados de exemplo em JSON
+│   └── usuarios.csv      # Dados de usuários em CSV
+├── modulo5/
+│   ├── aula28.js         # Configurações avançadas
+│   ├── aula31.js         # Integração com LoadImpact
+│   ├── aula35.js         # Testes de API REST
+│   └── aula36.js         # Testes de Browser
 └── README.md             # Este arquivo
 ```
 
@@ -85,9 +101,10 @@ export const options = {
 
 ### 📚 Módulo 3 - Técnicas Avançadas
 
-#### **aula10.js** - Configurações Avançadas
-- Configurações complexas de carga
-- Múltiplos cenários de teste
+#### **aula10.js** - Ciclo de Vida de Testes
+- Estrutura completa de um teste k6
+- Funções de inicialização, execução e desmontagem
+- Gerenciamento do ciclo de vida
 
 #### **aula11.js** - Configurações Específicas
 - Otimizações de performance
@@ -126,10 +143,99 @@ export const options = {
 const res = http.get(__ENV.URL);
 ```
 
+### 📚 Módulo 4 - Testes com Dados Externos
+
+#### **aula23.js** - Testes com Thresholds
+- Configuração de thresholds para validação automática
+- Verificação de status codes
+- Controle de qualidade dos testes
+
+#### **aula24.js** - Validações Avançadas
+- Múltiplas verificações em uma única requisição
+- Validação de headers e conteúdo
+- Estratégias de assertividade
+
+#### **aula25.js** - Registro de Usuários
+- Testes de APIs de registro
+- Geração de dados dinâmicos
+- Validação de respostas de criação
+
+#### **aula26.js** - Testes com Dados Externos
+- Leitura de arquivos JSON
+- Uso de dados externos em testes
+- Simulação de cenários realistas
+
+#### **aula27.js** - Manipulação de JSON
+- Parsing e manipulação de dados JSON
+- Estruturação de payloads
+- Validação de respostas estruturadas
+
+#### **aula28.js** - Testes com CSV
+- Leitura de arquivos CSV
+- Uso de dados tabulares em testes
+- Simulação de múltiplos usuários
+
+### 📚 Módulo 5 - Integração e Testes Avançados
+
+#### **aula28.js** - Configurações Avançadas
+- Configurações complexas de cenários
+- Otimizações de performance
+- Estratégias de teste avançadas
+
+#### **aula31.js** - Integração com LoadImpact
+- Configuração para execução em nuvem
+- Integração com plataforma LoadImpact
+- Testes distribuídos
+
+```javascript
+export const options = {
+    ext: {
+        loadimpact: {
+            projectID: '3704136',
+            name: 'POC CURSO K6'
+        }
+    }
+}
+```
+
+#### **aula35.js** - Testes de API REST
+- Testes completos de APIs REST
+- Operações CRUD
+- Validação de endpoints
+
+#### **aula36.js** - Testes de Browser
+- Testes de interface web com Chromium
+- Automação de navegação
+- Métricas de Web Vitals
+
+```javascript
+import { browser } from 'k6/experimental/browser';
+
+export const options = {
+    scenarios: {
+        ui: {
+            executor: 'constant-vus',
+            vus: 3,
+            duration: '10s',
+            options: {
+                browser: {
+                    type: 'chromium',
+                },
+            },
+        },
+    },
+    thresholds: {
+        browser_web_vital_fid: ["p(75) <= 100"],
+        browser_web_vital_lcp: ["p(75) <= 2500"],
+    },
+};
+```
+
 ## 🛠️ Como Executar
 
 ### Pré-requisitos
 1. Instalar o k6: [https://k6.io/docs/getting-started/installation/](https://k6.io/docs/getting-started/installation/)
+2. Para testes de browser: Instalar dependências do Chromium
 
 ### Comandos de Execução
 
@@ -155,8 +261,26 @@ k6 run modulo3/aula17.js
 k6 run modulo3/aula18.js
 k6 run modulo3/aula19.js
 
+# Módulo 4 - Testes com Dados Externos
+k6 run modulo4/aula23.js
+k6 run modulo4/aula24.js
+k6 run modulo4/aula25.js
+k6 run modulo4/aula26.js
+k6 run modulo4/aula27.js
+k6 run modulo4/aula28.js
+
+# Módulo 5 - Integração e Testes Avançados
+k6 run modulo5/aula28.js
+k6 run modulo5/aula31.js
+k6 run modulo5/aula35.js
+k6 run modulo5/aula36.js
+
 # Exemplo com variáveis de ambiente
 k6 run -e URL=https://test.k6.io modulo3/aula19.js
+
+# Execução com dados externos
+k6 run modulo4/aula26.js
+k6 run modulo4/aula28.js
 ```
 
 ## 📊 Tipos de Métricas no k6
@@ -172,6 +296,11 @@ k6 run -e URL=https://test.k6.io modulo3/aula19.js
 - **Gauge**: Para valores pontuais
 - **Rate**: Para taxas de sucesso
 - **Trend**: Para análise de tendências
+
+### Métricas de Browser (Web Vitals)
+- **browser_web_vital_fid**: First Input Delay
+- **browser_web_vital_lcp**: Largest Contentful Paint
+- **browser_web_vital_cls**: Cumulative Layout Shift
 
 ## 🎛️ Configurações de Carga
 
@@ -194,6 +323,28 @@ export const options = {
 }
 ```
 
+### Cenários Múltiplos
+```javascript
+export const options = {
+    scenarios: {
+        smoke: {
+            executor: 'constant-vus',
+            vus: 1,
+            duration: '10s'
+        },
+        load: {
+            executor: 'ramping-vus',
+            startVUs: 0,
+            stages: [
+                { duration: '2m', target: 50 },
+                { duration: '5m', target: 50 },
+                { duration: '2m', target: 0 }
+            ]
+        }
+    }
+}
+```
+
 ## 📈 Conceitos de Teste de Desempenho
 
 ### Tipos de Teste
@@ -202,12 +353,14 @@ export const options = {
 3. **Stress Test**: Teste de carga máxima
 4. **Spike Test**: Teste de picos de carga
 5. **Soak Test**: Teste de longa duração
+6. **Browser Test**: Teste de interface web
 
 ### Métricas Importantes
 - **Response Time**: Tempo de resposta
 - **Throughput**: Taxa de requisições por segundo
 - **Error Rate**: Taxa de erros
 - **Resource Utilization**: Utilização de recursos
+- **Web Vitals**: Métricas de performance web
 
 ## 🎓 Progressão de Aprendizado
 
@@ -218,10 +371,12 @@ export const options = {
 ### Para Intermediários
 1. **Módulo 2**: Aprofunde-se nos testes de `breakpointtest.js`, `spiketest.js` e `soaktest.js`
 2. **Módulo 3**: Explore técnicas avançadas começando com `aula10.js` e `aula11.js`
+3. **Módulo 4**: Aprenda a trabalhar com dados externos em `aula26.js` e `aula28.js`
 
 ### Para Avançados
 1. **Módulo 3**: Foque em `aula14.js` (métricas customizadas) e `aula15.js` (thresholds)
-2. **Módulo 3**: Aplique técnicas de análise com `aula17.js` e `aula18.js`
+2. **Módulo 4**: Aplique técnicas de análise com `aula17.js` e `aula18.js`
+3. **Módulo 5**: Explore integração com LoadImpact (`aula31.js`) e testes de browser (`aula36.js`)
 
 ## 🔧 Dicas de Uso
 
@@ -230,6 +385,9 @@ export const options = {
 3. **Analise métricas**: Foque em percentis (p95, p99) além da média
 4. **Teste em ambiente similar**: Use dados e configurações próximas ao produção
 5. **Use variáveis de ambiente**: Para flexibilidade entre ambientes (ex: `aula19.js`)
+6. **Aproveite dados externos**: Use JSON e CSV para cenários realistas
+7. **Integre com ferramentas**: Use LoadImpact para testes em nuvem
+8. **Teste interfaces web**: Use testes de browser para aplicações web completas
 
 ## 📚 Recursos Adicionais
 
@@ -237,6 +395,19 @@ export const options = {
 - [Exemplos de Scripts](https://github.com/grafana/k6-examples)
 - [Métricas e Thresholds](https://k6.io/docs/using-k6/thresholds/)
 - [Integração com Grafana](https://k6.io/docs/results-output/real-time/grafana/)
+- [Testes de Browser](https://k6.io/docs/using-k6-browser/)
+- [Integração com LoadImpact](https://k6.io/docs/cloud/)
+
+## 🏆 Conquistas do Curso
+
+✅ **Fundamentos do k6** - Estrutura básica e configurações
+✅ **Tipos de Teste** - Smoke, Load, Stress, Spike e Soak
+✅ **Técnicas Avançadas** - Métricas customizadas e thresholds
+✅ **Dados Externos** - Trabalho com JSON e CSV
+✅ **Integração** - LoadImpact e testes distribuídos
+✅ **Testes de Browser** - Automação web com Chromium
+✅ **APIs REST** - Testes completos de endpoints
+✅ **Web Vitals** - Métricas de performance web
 
 ## 🤝 Contribuição
 
@@ -247,4 +418,6 @@ Este repositório é para fins de estudo. Sinta-se à vontade para:
 
 ---
 
-**Happy Testing! 🧪**
+**🎉 Curso Finalizado com Sucesso! 🧪**
+
+*Todos os conceitos de testes de desempenho com k6 foram cobertos, desde fundamentos básicos até técnicas avançadas de integração e automação web.*
