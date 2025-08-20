@@ -51,7 +51,7 @@ testes-desempenho/
 └── README.md             # Este arquivo
 ```
 
-## 🎯 Exemplos Incluído
+## 🎯 Exemplos Incluídos
 
 ### 📚 Módulo 1 - Fundamentos
 
