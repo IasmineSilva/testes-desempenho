@@ -124,7 +124,7 @@ export const options = {
 
 #### **aula16.js** - Configurações de Ambiente
 - Variáveis de ambiente
-- Configurações dinâmicas
+
 
 #### **aula17.js** - Testes de Stress
 - Testes de carga máxima
