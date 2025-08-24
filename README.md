@@ -4,7 +4,7 @@ Este repositório contém exemplos práticos e estudos sobre testes de desempenh
 
 ## 📋 Sobre o k6
 
-O k6 é uma ferramenta de teste de carga de código aberto que permite:
+ k6 é uma ferramenta de teste de carga de código aberto que permite:
 - Escrever testes em JavaScript
 - Executar testes de carga, stress e spike
 - Gerar relatórios detalhados de performance
